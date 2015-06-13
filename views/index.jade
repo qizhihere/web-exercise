@@ -1,0 +1,32 @@
+extends layout
+
+block body
+  .row
+    h2.text-center= page_title
+  #edit-line.row.h-margin-lg
+    #search-box.col-md-5
+      input(type='text', placeholder="输入关键字...").form-control
+    .col-md-5.pull-right.editor-btn-box
+      a#add-data.btn.btn-primary(href='/add') 添加
+      button(type='button')#del-data.btn.btn-danger 删除(0)
+      button(type='button')#edit-data.btn.btn-default 编辑
+  .row
+    form(action='/update', method='post', enctype='multipart/form-data')
+      table#data-table.table.table-bordered.table-hover.table-responsive
+        thead
+          tr
+            td.edit-col.text-bold
+              input(type='checkbox')#sel-all
+              | 全选
+            th.num-col 序号
+            for field in fields
+              th= field
+        tbody
+          for user, i in users
+            tr
+              td.edit-box.edit-col
+                input(type='checkbox')
+                a(href='?') 编辑
+              td.num-col= i + 1
+              for v, k in fields
+                td(class=k)= user[k]

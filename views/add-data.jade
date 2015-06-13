@@ -1,0 +1,41 @@
+extends layout
+
+block body
+  .row
+    h3.text-center 添加数据
+  .row.h-margin-lg
+    #add-data-area.row
+      form(role='form').form-horizontal
+        - var random_id = Math.floor(Math.random(1) * 100000);
+        div(id='panel-' + random_id).panel.panel-default.data-panel
+          .panel-body
+            for v, k in fields
+              .form-group
+                label.col-sm-1.control-label= v
+                .col-sm-11
+                  input(type='text').form-control
+                  input(type='hidden', value=k)
+            .col-sm-2.col-sm-offset-5.btn-group
+              button(type='button').btn.btn-default.submit 添加
+    .col-md-12
+      .btn-group
+        .col-sm-4
+          a(href='/', role='button').btn.btn-default 返回主页
+        button(type='button' value='1')#add-more-data.btn.btn-default 继续添加
+        button(type='button', data-toggle='dropdown', aria-expanded='false').btn.btn-default.dropdown-toggle
+          span.caret
+          span.sr-only Toggle Dropdown
+          | &nbsp;
+        ul(role='menu')#add-more-data-list.dropdown-menu
+          li
+            a(href='#') 5条
+          li
+            a(href='#') 10条
+          li
+            a(href='#') 20条
+          li
+            a(href='#') 50条
+          li
+            a(href='#') 100条
+        .col-sm-2
+          button(type='button').btn.btn-success#submit-all 添加所有
